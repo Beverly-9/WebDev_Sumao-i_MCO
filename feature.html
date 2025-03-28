@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>Feature Page</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="feature.html">Feature Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Explore Our Featured Products</h2>
+        <p>Discover the best items we have to offer!</p>
+    </section>
+
+    <!-- Feature Presentation -->
+    <section class="feature-presentation">
+        <img src="assets/presentation.jpg" alt="Feature Image">
+        <div>
+            <h3>Why Choose Our Products?</h3>
+            <p>Our products are made with the highest quality materials, ensuring durability and customer satisfaction.</p>
+        </div>
+    </section>
+
+    <!-- Product Grid -->
+    <section class="products">
+        <h2>Our Featured Products</h2>
+        <div class="product-grid">
+            <div class="product">
+                <img src="assets/WirelessEarpods.jpg" alt="Wireless Earpods">
+                <h3>Wireless Earpods</h3>
+                <p>High-quality sound, noise cancellation, and long battery life.</p>
+                <p>Price: ₱1,750</p>
+                <button onclick="addToCart('Wireless Earpods', 1750)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="assets/speaker.jpg" alt="Portable Speaker">
+                <h3>Portable Speaker</h3>
+                <p>Compact design with powerful bass and Bluetooth connectivity.</p>
+                <p>Price: ₱2,500</p>
+                <button onclick="addToCart('Portable Speaker', 2500)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="assets/watch.jpg" alt="Smart Watch">
+                <h3>Smart Watch</h3>
+                <p>Track your fitness and stay connected with this stylish smartwatch.</p>
+                <p>Price: ₱3,750</p>
+                <button onclick="addToCart('Smart Watch', 3750)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="assets/headphone.jpg" alt="Wireless Headphones">
+                <h3>Wireless Headphones</h3>
+                <p>Enjoy immersive sound and comfort with these premium headphones.</p>
+                <p>Price: ₱2,000</p>
+                <button onclick="addToCart('Wireless Headphones', 2000)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sidebar: Feature Logo & Cart -->
+    <aside>
+        <img src="assets/logo.jpg" alt="Feature Logo">
+        <h3>Shopping Cart</h3>
+        <ul id="cart-list"></ul>
+        <p>Total: ₱<span id="total-price">0</span></p>
+    </aside>
+
+    <footer>
+        <p>© 2025 My Resume. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(productName, price) {
+            let item = cart.find(item => item.name === productName);
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({ name: productName, price: price, quantity: 1 });
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            let cartList = document.getElementById("cart-list");
+            let totalPrice = document.getElementById("total-price");
+            cartList.innerHTML = "";
+            let total = 0;
+
+            cart.forEach(item => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `${item.name} (x${item.quantity}) - ₱${item.price * item.quantity}`;
+                cartList.appendChild(listItem);
+                total += item.price * item.quantity;
+            });
+
+            totalPrice.textContent = total;
+        }
+    </script>
+
+</body>
+</html>
